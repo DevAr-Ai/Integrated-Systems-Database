@@ -1,0 +1,19 @@
+<h2>Approve Invoices</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <p>{{ form.invoice_id.label }} {{ form.invoice_id() }}</p>
+    <p>{{ form.account_type.label }} {{ form.account_type() }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+
+<h3>Account Balances</h3>
+<ul>
+    {% for acct in accounts %}
+        <li><strong>{{ acct.type }}</strong>: ${{ acct.balance }}</li>
+    {% else %}
+        <li>No accounts yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('main.accounting_home') }}">← Back to Accounting Dashboard</a>

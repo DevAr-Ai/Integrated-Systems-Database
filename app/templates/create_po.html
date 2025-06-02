@@ -1,0 +1,17 @@
+<h2>Create Purchase Order</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <p>{{ form.buyer_id.label }} {{ form.buyer_id() }}</p>
+
+    {% for i in range(1, 6) %}
+        <p>
+            {{ form['item_' ~ i].label }} {{ form['item_' ~ i]() }}
+            {{ form['qty_' ~ i].label }} {{ form['qty_' ~ i]() }}            
+        </p>
+    {% endfor %}
+
+    <p>{{ form.due_date.label }} {{ form.due_date() }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+
+<a href="{{ url_for('main.sales_home') }}">← Back to Sales</a>

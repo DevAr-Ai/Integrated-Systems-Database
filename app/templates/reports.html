@@ -1,0 +1,39 @@
+<h2>Reports</h2>
+
+<form method="get" action="{{ url_for('main.reports') }}">
+    <label>Select Report Type:</label>
+    <select name="type">
+        <option value="vendor">Vendor Purchases</option>
+        <option value="sales">Sales by Date</option>
+        <option value="po">PO by Due Date</option>
+    </select>
+    <button type="submit">Generate</button>
+</form>
+
+<hr>
+
+{% if report_type %}
+    <h3>Report: {{ report_type|capitalize }}</h3>
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                {% for key in data[0].__dict__.keys() if not key.startswith('_') %}
+                    <th>{{ key }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                {% for value in row.__dict__.values() if not loop.index0 %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button onclick="window.print()">Print Report</button>
+{% endif %}
+
+<a href="{{ url_for('main.accounting_home') }}">← Back to Accounting</a>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unfulfilled Purchase Orders</title>
+</head>
+<body>
+    <h2>Unfulfilled Purchase Orders</h2>
+
+    {% if pos %}
+        <form method="POST">
+            <table border="1" cellpadding="6" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>PO ID</th>
+                        <th>Items Needed</th>
+                        <th>Due Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for po in pos %}
+                    <tr>
+                        <td>{{ po.id }}</td>
+                        <td>{{ po.items_needed }}</td>
+                        <td>{{ po.description }}</td>
+                        <td>
+                            <button type="submit" name="po_id" value="{{ po.id }}">
+                                Mark as Fulfilled
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    {% else %}
+        <p>No unfulfilled POs at the moment.</p>
+    {% endif %}
+
+    <hr>
+    <a href="{{ url_for('main.fulfillment_home') }}">← Back to Fulfillment Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<h2>Inventory Home</h2>
+
+<h3>Add Inventory Item</h3>
+<form method="POST">
+    {{ inventory_form.hidden_tag() }}
+    {{ inventory_form.date.label }} {{ inventory_form.date() }}<br>
+    {{ inventory_form.item.label }} {{ inventory_form.item() }}<br>
+    {{ inventory_form.quantity.label }} {{ inventory_form.quantity() }}<br>
+    {{ inventory_form.cost.label }} {{ inventory_form.cost() }}<br>
+    {{ inventory_form.submit() }}
+</form>
+
+<h3>Inventory List</h3>
+<ul>
+    {% for item in inventory_items %}
+        <li>{{ item.date }} — {{ item.item }} ({{ item.quantity }} @ ${{ item.cost }})</li>
+    {% else %}
+        <li>No items in inventory.</li>
+    {% endfor %}
+</ul>
+
+<h3>Create Task</h3>
+<form method="POST">
+    {{ task_form.hidden_tag() }}
+    {{ task_form.title.label }} {{ task_form.title() }}<br>
+    {{ task_form.description.label }} {{ task_form.description() }}<br>
+    {{ task_form.assigned_to.label }} {{ task_form.assigned_to() }}<br>
+    {{ task_form.submit() }}
+</form>
+
+<h3>Tasks Assigned to Inventory</h3>
+<ul>
+    {% for task in tasks %}
+        <li><strong>{{ task.title }}</strong>: {{ task.description }}</li>
+    {% else %}
+        <li>No tasks assigned.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('main.logout') }}">Logout</a>

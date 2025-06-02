@@ -1,0 +1,38 @@
+<h2>Fulfillment Home</h2>
+
+<h3>Create Product from Inventory</h3>
+<form method="POST">
+    {{ product_form.hidden_tag() }}
+    {{ product_form.name.label }} {{ product_form.name() }}<br>
+    {{ product_form.components.label }} {{ product_form.components() }}<br>
+    {{ product_form.assigned_to.label }} {{ product_form.assigned_to() }}<br>
+    {{ product_form.submit() }}
+</form>
+
+<h3>Unfulfilled Purchase Orders</h3>
+<ul>
+    {% for po in pos %}
+        <li><strong>{{ po.title }}</strong>: {{ po.description }}<br>
+        Items Needed: {{ po.items_needed }}</li>
+    {% else %}
+        <li>No open POs</li>
+    {% endfor %}
+</ul>
+
+<h3>Mark PO as Fulfilled</h3>
+<form method="POST">
+    {{ fulfill_form.hidden_tag() }}
+    {{ fulfill_form.po_id.label }} {{ fulfill_form.po_id() }}<br>
+    {{ fulfill_form.submit() }}
+</form>
+
+<h3>All Products</h3>
+<ul>
+    {% for product in products %}
+        <li><strong>{{ product.name }}</strong> - Made from: {{ product.components }} → Assigned to: {{ product.assigned_to or 'Inventory' }}</li>
+    {% else %}
+        <li>No products created.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('main.logout') }}">Logout</a>

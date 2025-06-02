@@ -1,0 +1,37 @@
+<h2>Accounting Home</h2>
+
+<h3>Accounting Menu</h3>
+<ul>
+    <li><a href="{{ url_for('main.accounting_home') }}">Create Vendor</a></li>
+    <li><a href="{{ url_for('main.accounting_home') }}">Input Expense</a></li>
+    <li><a href="#">Create Report</a></li>
+    <li><a href="{{ url_for('main.bank_home') }}">Go to Bank Dashboard</a></li> <!-- ✅ Bank link -->
+</ul>
+
+<h3>Create Vendor</h3>
+<form method="POST">
+    {{ vendor_form.hidden_tag() }}
+    <p>{{ vendor_form.name.label }} {{ vendor_form.name() }}</p>
+    <p>{{ vendor_form.submit() }}</p>
+</form>
+
+<h3>Input Expense</h3>
+<form method="POST">
+    {{ expense_form.hidden_tag() }}
+    <p>{{ expense_form.vendor_id.label }} {{ expense_form.vendor_id() }}</p>
+    <p>{{ expense_form.amount.label }} {{ expense_form.amount() }}</p>
+    <p>{{ expense_form.description.label }} {{ expense_form.description() }}</p>
+    <p>{{ expense_form.date.label }} {{ expense_form.date() }}</p>
+    <p>{{ expense_form.submit() }}</p>
+</form>
+
+<h3>Tasks Assigned to Accounting</h3>
+<ul>
+    {% for task in tasks %}
+        <li><strong>{{ task.title }}</strong>: {{ task.description }}</li>
+    {% else %}
+        <li>No tasks assigned.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('main.logout') }}">Logout</a>

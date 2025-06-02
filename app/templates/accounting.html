@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accounting Home</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #f0f0f0;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #003366;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        h3 {
+            border-bottom: 2px solid #003366;
+            padding-bottom: 5px;
+        }
+        form p {
+            margin-bottom: 15px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+        }
+        input[type="submit"] {
+            background-color: #003366;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        input[type="submit"]:hover {
+            background-color: #0055aa;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul li {
+            padding: 5px 0;
+        }
+        .logout {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Accounting Dashboard</h2>
+    </header>
+
+    <nav>
+        <a href="#vendor-section">Create Vendor</a>
+        <a href="#expense-section">Input Expense</a>
+        <a href="#">Create Report</a>
+        <a href="{{ url_for('main.bank_home') }}">Bank Dashboard</a>
+        <a href="{{ url_for('main.approve_invoice') }}">Approve Invoices</a>
+    </nav>
+
+    <div class="container">
+        <div class="card" id="vendor-section">
+            <h3>Create Vendor</h3>
+            <form method="POST">
+                {{ vendor_form.hidden_tag() }}
+                <p>{{ vendor_form.name.label }} {{ vendor_form.name() }}</p>
+                <p>{{ vendor_form.submit() }}</p>
+            </form>
+        </div>
+
+        <div class="card" id="expense-section">
+            <h3>Input Expense</h3>
+            <form method="POST">
+                {{ expense_form.hidden_tag() }}
+                <p>{{ expense_form.vendor_id.label }} {{ expense_form.vendor_id() }}</p>
+                <p>{{ expense_form.amount.label }} {{ expense_form.amount() }}</p>
+                <p>{{ expense_form.description.label }} {{ expense_form.description() }}</p>
+                <p>{{ expense_form.date.label }} {{ expense_form.date() }}</p>
+                <p>{{ expense_form.submit() }}</p>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Tasks Assigned to Accounting</h3>
+            <ul>
+                {% for task in tasks %}
+                    <li><strong>{{ task.title }}</strong>: {{ task.description }}</li>
+                {% else %}
+                    <li>No tasks assigned.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <a class="logout" href="{{ url_for('main.logout') }}">Logout</a>
+    </div>
+</body>
+</html>

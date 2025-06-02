@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales Dashboard</title>
+</head>
+<body>
+    <h2>Welcome {{ user.username }} (Sales)</h2>
+
+    <h3>Sales Menu</h3>
+    <ul>
+        <li><a href="{{ url_for('main.create_po') }}">Create Purchase Order</a></li>
+        <li><a href="#">Create Invoice</a></li>
+        <li><a href="{{ url_for('main.create_buyer') }}">Create Buyer Profile</a></li>
+        <li><a href="{{ url_for('main.create_invoice') }}">Create Invoice</a></li>
+    </ul>
+
+    <a href="{{ url_for('main.logout') }}">Logout</a>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ user.department }} Home</title>
+</head>
+<body>
+
+    <h1> HOME </h1>
+    <br>
+    <h2>Welcome {{ user.username }} from {{ user.department }}</h2>
+
+    {% if user.department == 'Sales' %}
+        <h3>Sales Menu</h3>
+        <ul>
+            <li><a href="#">Create Invoice</a></li>
+            <li><a href="#">Create PO</a></li>
+            <li><a href="#">Create Buyer Profile</a></li>
+        </ul>
+
+    {% elif user.department == 'Accounting' %}
+        <h3>Accounting Menu</h3>
+        <ul>
+            <li><a href="#">Create Vendor</a></li>
+            <li><a href="#">Input Expense</a></li>
+            <li><a href="#">Create Report</a></li>
+        </ul>
+
+    {% elif user.department == 'Inventory' %}
+        <h3>Inventory Menu</h3>
+        <ul>
+            <li><a href="#">Input Item</a></li>
+            <li><a href="#">Assign Task</a></li>
+        </ul>
+
+    {% elif user.department == 'Fulfillment' %}
+        <h3>Fulfillment Menu</h3>
+        <ul>
+            <li><a href="#">Receive PO</a></li>
+            <li><a href="#">Assemble Product</a></li>
+            <li><a href="#">Dispatch to Department</a></li>
+        </ul>
+    {% endif %}
+
+    <p><a href="{{ url_for('main.logout') }}">Logout</a></p>
+</body>
+</html>

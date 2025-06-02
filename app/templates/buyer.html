@@ -1,0 +1,9 @@
+<h2>Create Buyer Profile</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.name.label }} {{ form.name() }}<br>
+    {{ form.email.label }} {{ form.email() }}<br>
+    {{ form.company.label }} {{ form.company() }}<br>
+    {{ form.submit() }}
+</form>
+<a href="{{ url_for('main.sales_home') }}">Back to Sales</a>
